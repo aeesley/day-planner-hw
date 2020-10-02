@@ -53,8 +53,37 @@ $(document).ready(function() {
     var textInput1 = $("#textinput1");
     console.log(textInput1);
 
+    var elem;
+    // adding array of potential time values
+    var time = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
 
+    var timeArray = ?
+    console.log(timeArray);
 
+    // setting a variable to read how moments.js formats the current time in hours
+    var currentTime = moment().format('HH:00');
+
+    // function to set the color of rows based on time of day
+    function setTimeColor(timeArray, currentTime) {
+        // running through the complete length of the timeArray
+        for (i = 0; i < timeArray.length; i++) {
+            var scheduleTime = moment(timeArray[i], "h:mm A").format("HH:mm");
+            // changing row to future class (green) if it hasn't hit yet
+            if (scheduleTime > currentTime) {
+                elem = document.getElementById('hour' + [i]);
+                elem.attr("class", "future");
+            // changing row to past class (grey) if it already happened
+            } else if (scheduleTime < currentTime) {
+                elem = document.getElementById('hour' + [i]);
+                elem.attr("class", "past");
+            // changing class to present class (red) if it's the current time slot happening
+            } else if (scheduleTime === currentTime) {
+                elem = document.getElementById('hour' + [i]);
+                elem.attr("class", "present");
+            }
+        }
+
+    }
 });
 
 
