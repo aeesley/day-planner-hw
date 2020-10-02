@@ -12,6 +12,34 @@ REQUIREMENTS
 - Can click on time block and add an event
 - When page is refreshed, edited time block should still appear */
 
+/* PSEUDO CODE
+
+DYNAMIC COLOR CODING
+var = textarea = ("#textarea")
+var = hour = ("#hour")
+var = row?
+
+function setColorStatus {
+
+    if (hour matches = current hour)
+    then assign class=present to textarea (GOES RED)
+    
+    if (hour < current hour)
+    then assign class=past to textarea (GOES GREY)
+
+    else
+    then assign class=future to textarea (GOES GREEN)
+
+}
+
+SAVE & DISPLAY TASK
+
+user input --> localStorage
+localStorage --> text-area
++ preventDefault function?
+
+*/
+
 $(document).ready(function() {
 
     // Getting current data & time to show up in header area
@@ -22,7 +50,13 @@ $(document).ready(function() {
     // pushing the current date variable to the right location on HTML
     $("#currentDay").text(currentDay);
 
+    var textInput1 = $("#textinput1");
+    console.log(textInput1);
 
 
 
 });
+
+
+// var task1 = localStorage.getItem("textinput1")
+// textInput1.textContent =
