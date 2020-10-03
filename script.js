@@ -93,20 +93,29 @@ $(document).ready(function() {
     //SETTING COLOR OF ROWS BASED ON TIME OF DAY
     let counter = 1
     for(const property in myCalendar) {
+        //creating a variable to read the textinput area + the correlating number (this will differentiate the text area divs from one another)
     let textInput = "#textinput" + counter;
+        // 
     $(textInput).text(myCalendar[property]);
+        // creating a variable to read the time area + the correlating number so it will read and differentiate between the time divs on different rows
     let calendarTime = "#time" + counter;
+        // creating a variable that will read the current time using the moments.js syntax
     let nowTime = moment().hour();
+        // using text syntax to return text content from the calendarTime variable and apply to the timeString variable
     let timeString = $(calendarTime).text();
+        // creating the timeNumber variable, which gives us the time from the HTML, but changed to an actual number instead of a string (which happens in the changeHourtoNumber function above)
     let timeNumber = changeHourToNumber(timeString);
-
+        // applying the class "past" from our css if the time identified in each row is less than the time identifed through moment.js current time
     if(timeNumber < nowTime) {
         $(textInput).addClass("past");
+        // applying the class "future" from our css if the time identified in each row is more than the time identifed through moment.js current time
     } else if (timeNumber > nowTime) {
         $(textInput).addClass("future");
+        // applying the class "present" from our css if the time identified in each row is more equal to the time identifed through moment.js current time
     } else if (timeNumber === nowTime) {
         $(textInput).addClass("present");
     }
+        //signifying since the counter started at 1 and it will increase for each row so that all of the information above will run through each row we have (ie. apply to all rows)
     counter ++;
 
     }
