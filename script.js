@@ -14,12 +14,17 @@ REQUIREMENTS
 
 /* PSEUDO CODE
 
+GET CURRENT DATE UP
+Create a variable mapping to correct part of header and then use moments.js syntax to map today's current date in
+
 DYNAMIC COLOR CODING
 var = textarea = ("#textarea")
 var = hour = ("#hour")
 var = row?
 
-function setColorStatus {
+* Need to map times in HTML to format that will match moments.js so we can use <, >, and = to determine which color to set the rows.
+
+use if and else statements within a function like =
 
     if (id=hour matches === current hour in Moments.js)
     then assign class=present to id=textarea (GOES RED)
@@ -30,13 +35,11 @@ function setColorStatus {
     if else (i=hour > current hour in Moments.js)
     then assign class=future to textarea (GOES GREEN)
 
-}
-
-Call setColorStatus
+Call function to activate
 
 SAVE & DISPLAY TASK
 
-user input --> localStorage
+user input --> localStorage (need to save both time and task input together)
 localStorage --> text-area
 + preventDefault function?
 
@@ -58,7 +61,7 @@ $(document).ready(function() {
     // console.log(textInput1);
 
     // Setting workDay var to use throughout rest of functions
-    let workDay = {
+    let myCalendar = {
         "8 AM": "",
         "9 AM": "",
         "10 AM": "",
@@ -89,9 +92,9 @@ $(document).ready(function() {
 
     //SETTING COLOR OF ROWS BASED ON TIME OF DAY
     let counter = 1
-    for(const property in workDay) {
+    for(const property in myCalendar) {
     let textInput = "#textinput" + counter;
-    $(textInput).text(workDay[property]);
+    $(textInput).text(myCalendar[property]);
     let calendarTime = "#time" + counter;
     let nowTime = moment().hour();
     let timeString = $(calendarTime).text();
@@ -108,12 +111,37 @@ $(document).ready(function() {
 
     }
 
+    // ADD IN FUNCTIONALITY FOR SAVING USER INPUT ITEMS & SAVING
+    if(!localStorage.getItem('myCalendar')) {
+        updateCalendarTasks(myCalendar);
+      } else {
+        updateCalendarTasks(JSON.parse(localStorage.getItem('myCalendar')));
+      }
 
 
-    var elem;
+
+    // function that uses on click event to store user input
+    $("btn1").on("click", function() {
+        // defining the two inputs for the text and the time of day
+        var taskValue = $("textinput1").val().trim();
+        var eventTime = $("#time-1pm").attr('hour');
+        //calling the save task function
+        saveTask(eventTime, taskValue);
+    });
+
+    function saveTask(eventTime, taskValue) {
+        if(!localStorage.getItem(''));
+    }
+}
+)
+
+// OLD SYNTAX, WORKING THROUGH ISSUES EXAMPLES OF THROUGHT PROCESS
+
+
+    // var elem;
     // adding array of potential time values
-    const timeArray = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
-    console.log(timeArray);
+    // const timeArray = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
+    // console.log(timeArray);
     // turning the array into a variable that prints all of the options
     // var timeArray = time.toString();
     // console.log(timeArray);
@@ -121,7 +149,7 @@ $(document).ready(function() {
     // NEED MORE VARIABLES HERE ==> Maybe about the spaces in HTML to map to?
 
     // setting a variable to read how moments.js formats the current time in hours
-    var currentTime = moment().format('HH:00');
+    // var currentTime = moment().format('HH:00');
 
     // // function to set the color of rows based on time of day
     // function setTimeColor(timeArray, currentTime) {
@@ -146,24 +174,6 @@ $(document).ready(function() {
     // // }
     // setTimeColor();
     // console.log(currentTime);
-
-    // ADD IN FUNCTIONALITY FOR SAVING USER INPUT ITEMS & SAVING
-
-    // function that uses on click event to store user input
-    $("btn1").on("click", function() {
-        // defining the two inputs for the text and the time of day
-        var taskValue = $("textinput1").val().trim();
-        var eventTime = $("#time-1pm").attr('hour');
-        //calling the save task function
-        saveTask(eventTime, taskValue);
-    });
-
-    function saveTask(eventTime, taskValue) {
-        if(!localStorage.getItem(''));
-    }
-}
-)
-
 
 // var task1 = localStorage.getItem("textinput1")
 // textInput1.textContent 
