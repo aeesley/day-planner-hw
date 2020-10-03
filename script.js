@@ -117,8 +117,8 @@ $(document).ready(function() {
     // function that uses on click event to store user input
     $("button").click(function() {
         // defining the two inputs for the text input and the time of day
-        taskValue = $(this).siblings("textarea").val();
-        hourString = $(this).siblings("div").text();
+        taskValue = $(this).siblings("textarea").val(); // textarea is a sibling of button being referenced above, which is why the "this" works here, it's finding the next sibling referenced as that
+        hourString = $(this).siblings("div").text(); // div is a sibling of button being referenced above, which is why the "this" works here, it's finding the next div referenced as that
         //calling the save task function
         saveTask(hourString, taskValue);
     });
@@ -126,7 +126,6 @@ $(document).ready(function() {
     // changing the string value of the times to numbers to use in function to change row color so we can use less than/greater than/equal to
     function changeHourToNumber(hourString) {
         switch(hourString) {
-            case "8 AM": return 8;
             case "9 AM": return 9;
             case "10 AM": return 10;
             case "11 AM": return 11;
@@ -139,19 +138,13 @@ $(document).ready(function() {
         }
     }
 
-    // function loadData() {
-    //     result = localStorage.getItem('myCalendar')
-    //     // Using a ternary operator (https://www.geeksforgeeks.org/ternary-operator-question-mark-and-colon-in-javascript/)
-    //     return (result ? result : myCalendar);
-    // }
-
     function startStorage() {
         localStorage.setItem('myCalendar', JSON.stringify(myCalendar));
     };
 
     function saveLocalStorage(dayInput) {
         localStorage.setItem('myCalendar', JSON.stringify(dayInput));
-    };
+    }
 
     function saveTask(hourString, val) {
         if(!localStorage.getItem('myCalendar')) {
@@ -165,7 +158,7 @@ $(document).ready(function() {
     }
 
     function updateCalendar(dayInput) {
-        $("row").each(function(index) {
+        $(".calendarrow").each(function(index) {
             let res = $(this).children("div");
             $(this).children("textinput").text(dayInput[res.text()]);
         })
