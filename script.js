@@ -21,16 +21,18 @@ var = row?
 
 function setColorStatus {
 
-    if (hour matches = current hour)
-    then assign class=present to textarea (GOES RED)
+    if (id=hour matches === current hour in Moments.js)
+    then assign class=present to id=textarea (GOES RED)
     
-    if (hour < current hour)
+    if else (id=hour < current hour in Moments.js)
     then assign class=past to textarea (GOES GREY)
 
-    else
+    if else (i=hour > current hour in Moments.js)
     then assign class=future to textarea (GOES GREEN)
 
 }
+
+Call setColorStatus
 
 SAVE & DISPLAY TASK
 
@@ -50,15 +52,19 @@ $(document).ready(function() {
     // pushing the current date variable to the right location on HTML
     $("#currentDay").text(currentDay);
 
-    var textInput1 = $("#textinput1");
-    console.log(textInput1);
+    // var textInput1 = $("#textinput1");
+    // console.log(textInput1);
 
+    //SETTING COLOR OF ROWS BASED ON TIME OF DAY
     var elem;
     // adding array of potential time values
-    var time = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
-
-    var timeArray = ?
+    const timeArray = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
     console.log(timeArray);
+    // turning the array into a variable that prints all of the options
+    // var timeArray = time.toString();
+    // console.log(timeArray);
+
+    // NEED MORE VARIABLES HERE ==> Maybe about the spaces in HTML to map to?
 
     // setting a variable to read how moments.js formats the current time in hours
     var currentTime = moment().format('HH:00');
@@ -84,8 +90,23 @@ $(document).ready(function() {
         }
 
     }
-});
+    setTimeColor();
+    console.log(currentTime);
+
+    // ADD IN FUNCTIONALITY FOR SAVING USER INPUT ITEMS & SAVING
+
+    // function that uses on click event to store user input
+    $("btn1").on("click", function() {
+        var event = $("textinput1").val().trim();
+        var eventTime = $("#time-1pm").attr('hour');
+
+        console.log(event);
+        console.log(eventTime);
+        localStorage.setItem(eventTime, event);
+    });
+}
+)
 
 
 // var task1 = localStorage.getItem("textinput1")
-// textInput1.textContent =
+// textInput1.textContent 
