@@ -48,18 +48,18 @@ localStorage --> text-area
 // START OF JS
 
     // Setting myCalendar so that these values can save as a whole string of information to localStorage to be accessed
-    let myCalendar = {
-        "8 AM": "",
-        "9 AM": "",
-        "10 AM": "",
-        "11 AM": "",
-        "12 PM": "",
-        "1 PM": "",
-        "2 PM": "",
-        "3 PM": "",
-        "4 PM": "",
-        "5 PM": "",
-    };    
+let myCalendar = {
+    "8 AM": "",
+    "9 AM": "",
+    "10 AM": "",
+    "11 AM": "",
+    "12 PM": "",
+    "1 PM": "",
+    "2 PM": "",
+    "3 PM": "",
+    "4 PM": "",
+    "5 PM": "",
+};    
 // - This function makes sure that JS doesn't load until page is completely loaded
 $(document).ready(function() {
     // ADD IN FUNCTIONALITY FOR SAVING USER INPUT ITEMS & SAVING
@@ -68,6 +68,8 @@ $(document).ready(function() {
       } else {
         updateCalendar(JSON.parse(localStorage.getItem('myCalendar')));
       }
+
+
     // GETTING CURRENT DATE IN HEADER AREA
     // defining the variable mapped to the id on HTML
     var currentDay = $("#currentDay");
@@ -110,17 +112,15 @@ $(document).ready(function() {
 
     }
 
-
-
-
+    // SAVING AND DISPLAYING THE INPUT
 
     // function that uses on click event to store user input
-    $("btn1").on("click", function() {
+    $("button").click(function() {
         // defining the two inputs for the text input and the time of day
         var taskValue = $(this).siblings("textinput").val();
-        var eventTime = $(this).siblings("div").text();
+        var hourString = $(this).siblings("div").text();
         //calling the save task function
-        saveTask(eventTime, taskValue);
+        saveTask(hourString, taskValue);
     });
 
     // changing the string value of the times to numbers to use in function to change row color so we can use less than/greater than/equal to
@@ -153,13 +153,13 @@ $(document).ready(function() {
         localStorage.setItem('myCalendar', JSON.stringify(dayInput));
     };
 
-    function saveTask(eventTime, val) {
+    function saveTask(hourString, val) {
         if(!localStorage.getItem('myCalendar')) {
             startStorage();
         }
 
         let calendarHours = JSON.parse(localStorage.getItem('myCalendar'));
-        calendarHours[eventTime] = val
+        calendarHours[hourString] = val
 
         saveLocalStorage(calendarHours);
     }
