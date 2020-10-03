@@ -45,18 +45,7 @@ localStorage --> text-area
 
 */
 
-// START OF JS - This function makes sure that JS doesn't load until page is completely loaded
-$(document).ready(function() {
-
-    // GETTING CURRENT DATE IN HEADER AREA
-    // defining the variable mapped to the id on HTML
-    var currentDay = $("#currentDay");
-    // using the moments.js syntax to define variable with the dates
-    currentDay = moment().format('MMMM Do YYYY, h:mm:ss a'); 
-    // pushing the current date variable to the right location on HTML
-    $("#currentDay").text(currentDay);
-
-
+// START OF JS
 
     // Setting myCalendar so that these values can save as a whole string of information to localStorage to be accessed
     let myCalendar = {
@@ -71,6 +60,24 @@ $(document).ready(function() {
         "4 PM": "",
         "5 PM": "",
     };    
+// - This function makes sure that JS doesn't load until page is completely loaded
+$(document).ready(function() {
+    // ADD IN FUNCTIONALITY FOR SAVING USER INPUT ITEMS & SAVING
+    if(!localStorage.getItem('myCalendar')) {
+        updateCalendar(myCalendar);
+      } else {
+        updateCalendar(JSON.parse(localStorage.getItem('myCalendar')));
+      }
+    // GETTING CURRENT DATE IN HEADER AREA
+    // defining the variable mapped to the id on HTML
+    var currentDay = $("#currentDay");
+    // using the moments.js syntax to define variable with the dates
+    currentDay = moment().format('MMMM Do YYYY, h:mm:ss a'); 
+    // pushing the current date variable to the right location on HTML
+    $("#currentDay").text(currentDay);
+
+
+
 
 
     //SETTING COLOR OF ROWS BASED ON TIME OF DAY
@@ -103,12 +110,7 @@ $(document).ready(function() {
 
     }
 
-    // ADD IN FUNCTIONALITY FOR SAVING USER INPUT ITEMS & SAVING
-    if(!localStorage.getItem('myCalendar')) {
-        updateCalendar(myCalendar);
-      } else {
-        updateCalendar(JSON.parse(localStorage.getItem('myCalendar')));
-      }
+
 
 
 
@@ -137,11 +139,11 @@ $(document).ready(function() {
         }
     }
 
-    function loadData() {
-        result = localStorage.getItem('myCalendar')
-        // Using a ternary operator (https://www.geeksforgeeks.org/ternary-operator-question-mark-and-colon-in-javascript/)
-        return (result ? result : myCalendar);
-    }
+    // function loadData() {
+    //     result = localStorage.getItem('myCalendar')
+    //     // Using a ternary operator (https://www.geeksforgeeks.org/ternary-operator-question-mark-and-colon-in-javascript/)
+    //     return (result ? result : myCalendar);
+    // }
 
     function startStorage() {
         localStorage.setItem('myCalendar', JSON.stringify(myCalendar));
@@ -151,7 +153,7 @@ $(document).ready(function() {
         localStorage.setItem('myCalendar', JSON.stringify(dayInput));
     };
 
-    function saveInput(eventTime, taskValue) {
+    function saveTask(eventTime, val) {
         if(!localStorage.getItem('myCalendar')) {
             startStorage();
         }
