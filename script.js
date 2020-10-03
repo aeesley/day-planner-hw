@@ -55,6 +55,21 @@ let workDay = {
     "5 PM": "",
 };
 
+function changeHourToNumber(hourString) {
+    switch(hourString) {
+        case "8 AM": return 8;
+        case "9 AM": return 9;
+        case "10 AM": return 10;
+        case "11 AM": return 11;
+        case "12 PM": return 12;
+        case "1 PM": return 13;
+        case "2 PM": return 14;
+        case "3 PM": return 15;
+        case "4 PM": return 16;
+        case "5 PM": return 17;
+    }
+}
+
 $(document).ready(function() {
 
     // GETTING CURRENT DATE IN HEADER AREA
@@ -79,8 +94,13 @@ $(document).ready(function() {
     })
 
     //SETTING COLOR OF ROWS BASED ON TIME OF DAY
+    let counter = 1
+    let calendarTime = "#time" + counter;
+    let nowTime = moment().hour();
+    let timeString = $(calendarTime).text();
+    let timeNumber = hourNumberFrontString(timeString);
 
-    let calendarTime = "#time" + CountQueuingStrategy;
+
     var elem;
     // adding array of potential time values
     const timeArray = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
