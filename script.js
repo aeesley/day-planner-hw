@@ -79,9 +79,6 @@ $(document).ready(function() {
     $("#currentDay").text(currentDay);
 
 
-
-
-
     //SETTING COLOR OF ROWS BASED ON TIME OF DAY
     let counter = 1
     for(const property in myCalendar) {
@@ -157,10 +154,10 @@ $(document).ready(function() {
         saveLocalStorage(calendarHours);
     }
 
-    function updateCalendar(dayInput) {
-        $(".calendarrow").each(function(index) {
+    function updateCalendar(dayObject) {
+        $(".row").each(function(index) {
             let res = $(this).children("div");
-            $(this).children("textinput").text(dayInput[res.text()]);
+            $(this).children("textinput").text(dayObject[res.text()]);
         })
     }
 
