@@ -57,15 +57,6 @@ let workDay = {
 
 $(document).ready(function() {
 
-    $(document).ready(function() {
-        if(!localStorage.getItem('workDay')) {
-            updateCalendarTasks(workDay);
-
-        } else {
-            updateCalendarTasks(JSON.parse(localStorage.getItem('workDay')));
-        }
-    })
-
     // GETTING CURRENT DATE IN HEADER AREA
     // defining the variable mapped to the id on HTML
     var currentDay = $("#currentDay");
@@ -77,7 +68,19 @@ $(document).ready(function() {
     // var textInput1 = $("#textinput1");
     // console.log(textInput1);
 
+
+    $(document).ready(function() {
+        if(!localStorage.getItem('workDay')) {
+            updateCalendarTasks(workDay);
+
+        } else {
+            updateCalendarTasks(JSON.parse(localStorage.getItem('workDay')));
+        }
+    })
+
     //SETTING COLOR OF ROWS BASED ON TIME OF DAY
+
+    let calendarTime = "#time" + CountQueuingStrategy;
     var elem;
     // adding array of potential time values
     const timeArray = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"];
