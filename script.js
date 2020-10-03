@@ -42,9 +42,31 @@ localStorage --> text-area
 
 */
 
+let workDay = {
+    "8 AM": "",
+    "9 AM": "",
+    "10 AM": "",
+    "11 AM": "",
+    "12 PM": "",
+    "1 PM": "",
+    "2 PM": "",
+    "3 PM": "",
+    "4 PM": "",
+    "5 PM": "",
+};
+
 $(document).ready(function() {
 
-    // Getting current data & time to show up in header area
+    $(document).ready(function() {
+        if(!localStorage.getItem('workDay')) {
+            updateCalendarTasks(workDay);
+
+        } else {
+            updateCalendarTasks(JSON.parse(localStorage.getItem('workDay')));
+        }
+    })
+
+    // GETTING CURRENT DATE IN HEADER AREA
     // defining the variable mapped to the id on HTML
     var currentDay = $("#currentDay");
     // using the moments.js syntax to define variable with the dates
@@ -97,13 +119,16 @@ $(document).ready(function() {
 
     // function that uses on click event to store user input
     $("btn1").on("click", function() {
-        var event = $("textinput1").val().trim();
+        // defining the two inputs for the text and the time of day
+        var taskValue = $("textinput1").val().trim();
         var eventTime = $("#time-1pm").attr('hour');
-
-        console.log(event);
-        console.log(eventTime);
-        localStorage.setItem(eventTime, event);
+        //calling the save task function
+        saveTask(eventTime, taskValue);
     });
+
+    function saveTask(eventTime, taskValue) {
+        if(!localStorage.getItem(''))
+    }
 }
 )
 
