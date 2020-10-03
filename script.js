@@ -45,8 +45,7 @@ localStorage --> text-area
 
 */
 
-
-
+// START OF JS - This function makes sure that JS doesn't load until page is completely loaded
 $(document).ready(function() {
 
     // GETTING CURRENT DATE IN HEADER AREA
@@ -57,10 +56,9 @@ $(document).ready(function() {
     // pushing the current date variable to the right location on HTML
     $("#currentDay").text(currentDay);
 
-    // var textInput1 = $("#textinput1");
-    // console.log(textInput1);
 
-    // Setting workDay var to use throughout rest of functions
+
+    // Setting myCalendar so that these values can save as a whole string of information to localStorage to be accessed
     let myCalendar = {
         "8 AM": "",
         "9 AM": "",
@@ -74,21 +72,6 @@ $(document).ready(function() {
         "5 PM": "",
     };    
 
-    // changing the string value of the times to numbers to use in function to change row color so we can use less than/greater than/equal to
-    function changeHourToNumber(hourString) {
-        switch(hourString) {
-            case "8 AM": return 8;
-            case "9 AM": return 9;
-            case "10 AM": return 10;
-            case "11 AM": return 11;
-            case "12 PM": return 12;
-            case "1 PM": return 13;
-            case "2 PM": return 14;
-            case "3 PM": return 15;
-            case "4 PM": return 16;
-            case "5 PM": return 17;
-        }
-    }
 
     //SETTING COLOR OF ROWS BASED ON TIME OF DAY
     let counter = 1
@@ -132,11 +115,27 @@ $(document).ready(function() {
     // function that uses on click event to store user input
     $("btn1").on("click", function() {
         // defining the two inputs for the text input and the time of day
-        var taskValue = $("textinput1").val().trim();
-        var eventTime = $("#time-1pm").attr('hour');
+        var taskValue = $(this).siblings("textinput").val();
+        var eventTime = $(this).siblings("div").text();
         //calling the save task function
         saveTask(eventTime, taskValue);
     });
+
+    // changing the string value of the times to numbers to use in function to change row color so we can use less than/greater than/equal to
+    function changeHourToNumber(hourString) {
+        switch(hourString) {
+            case "8 AM": return 8;
+            case "9 AM": return 9;
+            case "10 AM": return 10;
+            case "11 AM": return 11;
+            case "12 PM": return 12;
+            case "1 PM": return 13;
+            case "2 PM": return 14;
+            case "3 PM": return 15;
+            case "4 PM": return 16;
+            case "5 PM": return 17;
+        }
+    }
 
     function loadData() {
         result = localStorage.getItem('myCalendar')
@@ -219,3 +218,6 @@ $(document).ready(function() {
     // function saveTask(eventTime, taskValue) {
     //     if(!localStorage.getItem(''));
     // }
+
+        // var textInput1 = $("#textinput1");
+    // console.log(textInput1);
