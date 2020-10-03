@@ -115,32 +115,61 @@ $(document).ready(function() {
     } else if (timeNumber === nowTime) {
         $(textInput).addClass("present");
     }
-        //signifying since the counter started at 1 and it will increase for each row so that all of the information above will run through each row we have (ie. apply to all rows)
+        //signifying since the counter started at 1 and it will increase for each row so that all of the information above will run through each row we have (ie. apply to all rows) || This is called an increment operator (https://stackoverflow.com/questions/42007576/what-does-mean-in-jquery-javascript)
     counter ++;
 
     }
 
     // ADD IN FUNCTIONALITY FOR SAVING USER INPUT ITEMS & SAVING
     if(!localStorage.getItem('myCalendar')) {
-        updateCalendarTasks(myCalendar);
+        updateCalendar(myCalendar);
       } else {
-        updateCalendarTasks(JSON.parse(localStorage.getItem('myCalendar')));
+        updateCalendar(JSON.parse(localStorage.getItem('myCalendar')));
       }
 
 
 
     // function that uses on click event to store user input
     $("btn1").on("click", function() {
-        // defining the two inputs for the text and the time of day
+        // defining the two inputs for the text input and the time of day
         var taskValue = $("textinput1").val().trim();
         var eventTime = $("#time-1pm").attr('hour');
         //calling the save task function
         saveTask(eventTime, taskValue);
     });
 
-    function saveTask(eventTime, taskValue) {
-        if(!localStorage.getItem(''));
+    function loadData() {
+        result = localStorage.getItem('myCalendar')
+        // Using a ternary operator (https://www.geeksforgeeks.org/ternary-operator-question-mark-and-colon-in-javascript/)
+        return (result ? result : myCalendar);
     }
+
+    function startStorage() {
+        localStorage.setItem('myCalendar', JSON.stringify(myCalendar));
+    };
+
+    function saveLocalStorage(dayInput) {
+        localStorage.setItem('myCalendar', JSON.stringify(dayInput));
+    };
+
+    function saveInput(eventTime, taskValue) {
+        if(!localStorage.getItem('myCalendar')) {
+            startStorage();
+        }
+
+        let calendarHours = JSON.parse(localStorage.getItem('myCalendar'));
+        calendarHours[eventTime] = val
+
+        saveLocalStorage(calendarHours);
+    }
+
+    function updateCalendar(dayInput) {
+        $("row").each(function(index) {
+            let res = $(this).children("div");
+            $(this).children("textinput").text(dayInput[res.text()]);
+        })
+    }
+
 }
 )
 
@@ -186,3 +215,7 @@ $(document).ready(function() {
 
 // var task1 = localStorage.getItem("textinput1")
 // textInput1.textContent 
+
+    // function saveTask(eventTime, taskValue) {
+    //     if(!localStorage.getItem(''));
+    // }
