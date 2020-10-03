@@ -87,15 +87,6 @@ $(document).ready(function() {
         }
     }
 
-    $(document).ready(function() {
-        if(!localStorage.getItem('workDay')) {
-            updateCalendarTasks(workDay);
-
-        } else {
-            updateCalendarTasks(JSON.parse(localStorage.getItem('workDay')));
-        }
-    })
-
     //SETTING COLOR OF ROWS BASED ON TIME OF DAY
     let counter = 1
     for(const property in workDay) {
@@ -104,7 +95,7 @@ $(document).ready(function() {
     let calendarTime = "#time" + counter;
     let nowTime = moment().hour();
     let timeString = $(calendarTime).text();
-    let timeNumber = hourNumberFrontString(timeString);
+    let timeNumber = changeHourToNumber(timeString);
 
     if(timeNumber < nowTime) {
         $(textInput).addClass("past");
@@ -112,9 +103,12 @@ $(document).ready(function() {
         $(textInput).addClass("future");
     } else if (timeNumber === nowTime) {
         $(textInput).addClass("present");
-   } 
+    }
+    counter ++;
 
     }
+
+
 
     var elem;
     // adding array of potential time values
@@ -149,9 +143,9 @@ $(document).ready(function() {
     //         }
     //     }
 
-    // }
-    setTimeColor();
-    console.log(currentTime);
+    // // }
+    // setTimeColor();
+    // console.log(currentTime);
 
     // ADD IN FUNCTIONALITY FOR SAVING USER INPUT ITEMS & SAVING
 
@@ -165,7 +159,7 @@ $(document).ready(function() {
     });
 
     function saveTask(eventTime, taskValue) {
-        if(!localStorage.getItem(''))
+        if(!localStorage.getItem(''));
     }
 }
 )
