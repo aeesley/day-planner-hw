@@ -117,8 +117,8 @@ $(document).ready(function() {
     // function that uses on click event to store user input
     $("button").click(function() {
         // defining the two inputs for the text input and the time of day
-        var taskValue = $(this).siblings("textinput").val();
-        var hourString = $(this).siblings("div").text();
+        taskValue = $(this).siblings("textarea").val();
+        hourString = $(this).siblings("div").text();
         //calling the save task function
         saveTask(hourString, taskValue);
     });
