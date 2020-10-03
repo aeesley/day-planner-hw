@@ -42,33 +42,7 @@ localStorage --> text-area
 
 */
 
-let workDay = {
-    "8 AM": "",
-    "9 AM": "",
-    "10 AM": "",
-    "11 AM": "",
-    "12 PM": "",
-    "1 PM": "",
-    "2 PM": "",
-    "3 PM": "",
-    "4 PM": "",
-    "5 PM": "",
-};
 
-function changeHourToNumber(hourString) {
-    switch(hourString) {
-        case "8 AM": return 8;
-        case "9 AM": return 9;
-        case "10 AM": return 10;
-        case "11 AM": return 11;
-        case "12 PM": return 12;
-        case "1 PM": return 13;
-        case "2 PM": return 14;
-        case "3 PM": return 15;
-        case "4 PM": return 16;
-        case "5 PM": return 17;
-    }
-}
 
 $(document).ready(function() {
 
@@ -83,6 +57,35 @@ $(document).ready(function() {
     // var textInput1 = $("#textinput1");
     // console.log(textInput1);
 
+    // Setting workDay var to use throughout rest of functions
+    let workDay = {
+        "8 AM": "",
+        "9 AM": "",
+        "10 AM": "",
+        "11 AM": "",
+        "12 PM": "",
+        "1 PM": "",
+        "2 PM": "",
+        "3 PM": "",
+        "4 PM": "",
+        "5 PM": "",
+    };    
+
+    // changing the string value of the times to numbers to use in function to change row color so we can use less than/greater than/equal to
+    function changeHourToNumber(hourString) {
+        switch(hourString) {
+            case "8 AM": return 8;
+            case "9 AM": return 9;
+            case "10 AM": return 10;
+            case "11 AM": return 11;
+            case "12 PM": return 12;
+            case "1 PM": return 13;
+            case "2 PM": return 14;
+            case "3 PM": return 15;
+            case "4 PM": return 16;
+            case "5 PM": return 17;
+        }
+    }
 
     $(document).ready(function() {
         if(!localStorage.getItem('workDay')) {
@@ -95,11 +98,23 @@ $(document).ready(function() {
 
     //SETTING COLOR OF ROWS BASED ON TIME OF DAY
     let counter = 1
+    for(const property in workDay) {
+    let textInput = "#textinput" + counter;
+    $(textInput).text(workDay[property]);
     let calendarTime = "#time" + counter;
     let nowTime = moment().hour();
     let timeString = $(calendarTime).text();
     let timeNumber = hourNumberFrontString(timeString);
 
+    if(timeNumber < nowTime) {
+        $(textInput).addClass("past");
+    } else if (timeNumber > nowTime) {
+        $(textInput).addClass("future");
+    } else if (timeNumber === nowTime) {
+        $(textInput).addClass("present");
+   } 
+
+    }
 
     var elem;
     // adding array of potential time values
@@ -114,27 +129,27 @@ $(document).ready(function() {
     // setting a variable to read how moments.js formats the current time in hours
     var currentTime = moment().format('HH:00');
 
-    // function to set the color of rows based on time of day
-    function setTimeColor(timeArray, currentTime) {
-        // running through the complete length of the timeArray
-        for (i = 0; i < timeArray.length; i++) {
-            var scheduleTime = moment(timeArray[i], "h:mm A").format("HH:mm");
-            // changing row to future class (green) if it hasn't hit yet
-            if (scheduleTime > currentTime) {
-                elem = document.getElementById('hour' + [i]);
-                elem.attr("class", "future");
-            // changing row to past class (grey) if it already happened
-            } else if (scheduleTime < currentTime) {
-                elem = document.getElementById('hour' + [i]);
-                elem.attr("class", "past");
-            // changing class to present class (red) if it's the current time slot happening
-            } else if (scheduleTime === currentTime) {
-                elem = document.getElementById('hour' + [i]);
-                elem.attr("class", "present");
-            }
-        }
+    // // function to set the color of rows based on time of day
+    // function setTimeColor(timeArray, currentTime) {
+    //     // running through the complete length of the timeArray
+    //     for (i = 0; i < timeArray.length; i++) {
+    //         var scheduleTime = moment(timeArray[i], "h:mm A").format("HH:mm");
+    //         // changing row to future class (green) if it hasn't hit yet
+    //         if (scheduleTime > currentTime) {
+    //             elem = document.getElementById('hour' + [i]);
+    //             elem.attr("class", "future");
+    //         // changing row to past class (grey) if it already happened
+    //         } else if (scheduleTime < currentTime) {
+    //             elem = document.getElementById('hour' + [i]);
+    //             elem.attr("class", "past");
+    //         // changing class to present class (red) if it's the current time slot happening
+    //         } else if (scheduleTime === currentTime) {
+    //             elem = document.getElementById('hour' + [i]);
+    //             elem.attr("class", "present");
+    //         }
+    //     }
 
-    }
+    // }
     setTimeColor();
     console.log(currentTime);
 
