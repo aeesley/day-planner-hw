@@ -1,5 +1,10 @@
 # day-planner-hw
 
+PROJECT DESCRIPTION
+
+This project assigned through Northwestern University's Coding Bootcamp was to make a simple day planner where a user can add and save items to their calendar for the day. Saved inputs should remain on the screen even after the page is refreshed. The color of the rows should also change automatically based on the time of day so the user is aware of the flow of their day. We have been instructed to use jquery and moment.js, so both of those will be used in this project.
+
+Some HTML and CSS were provided for this assignement.
 
 
 SOURCES
